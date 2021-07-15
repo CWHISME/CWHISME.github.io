@@ -6,7 +6,7 @@
   <link href="https://cwhisme.ml/atom.xml" rel="self"/>
   
   <link href="https://cwhisme.ml/"/>
-  <updated>2021-07-09T03:52:05.746Z</updated>
+  <updated>2021-07-15T10:17:16.518Z</updated>
   <id>https://cwhisme.ml/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用VS2019调试Unity2020中DLL问题</title>
+    <link href="https://cwhisme.ml/2021/07/15/%E4%BD%BF%E7%94%A8VS2019%E8%B0%83%E8%AF%95Unity2020%E4%B8%ADDLL%E9%97%AE%E9%A2%98/"/>
+    <id>https://cwhisme.ml/2021/07/15/%E4%BD%BF%E7%94%A8VS2019%E8%B0%83%E8%AF%95Unity2020%E4%B8%ADDLL%E9%97%AE%E9%A2%98/</id>
+    <published>2021-07-15T09:28:35.000Z</published>
+    <updated>2021-07-15T10:17:16.518Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一般在开发项目的时候，为了便于管理，都不会直接把代码建立到Unity3D中，而是使用第三方工程，然后编译成DLL放进来使用。</p><p>今天我就碰到个问题：死活无法调试这个DLL，算是愁了一天了。</p><p>打断点就提示『当前不会命中断点。找不到相应位置』表现就像如下：</p><p><a href="/blogimages/2021/2021-07-15/Snipaste_2021-07-15_17-35-48.png"></a></p><p>想想代码调试不了，就非常愁。<br>而搜索的话，Unity相关有用的信息现在也是越来越少，一连好几页结果翻下去，都是摸不着点的。</p><p>先后试过：</p><ul><li>选项-&gt;调试-&gt;符号设置</li><li>选项-&gt;调试-&gt;去掉『启用”仅我的代码”』</li><li>选项-&gt;调试-&gt;去掉『要求源文件与原始版本完全相同』</li><li>选项-&gt;适用于Unity工具设置</li><li>Unity中一些设置 等等…</li></ul><p>然而没有任何作用。</p><p>后面还检查了 调试-&gt;窗口-&gt;模块，也显示符号已加载：</p><p><img src="/blogimages/2021/2021-07-15/Snipaste_2021-07-15_17-44-15.png"></p><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>后面还是偶然跟同事提了提，稍微讨论了下，然后说是不是DLL版本问题？</p><p>于是我就着重在筛选了一下搜索结果，在 <a href="https://blog.csdn.net/yuxikuo_1/article/details/52328579">Unity5将DLL生成mdb的方法</a> 中，得到了那么点灵感。</p><p>于是跟着路径找到Unity的安装目录：<font color=red>Editor\Data\MonoBleedingEdge\lib\mono</font></p><p><img src="/blogimages/2021/2021-07-15/Snipaste_2021-07-15_17-49-59.png"></p><p>个人的 DLL 编译版本是 4.6 ，看了下这里确实有 4.6-api，但是各种工具都位于 4.5 目录，包括 pdb2mdb.exe 各种 exe 格式工具。</p><p>于是将DLL库项目框架版本号改为 4.6，重新编译，得到如下结果：</p><p><img src="/blogimages/2021/2021-07-15/Snipaste_2021-07-15_17-00-51.png"></p><p>意思是说 pdb 格式有点过时了，要么改成 可移植 pdb 格式——这个我在上一篇 <a href="/2021/07/08/Box2DSharp%E7%9A%84%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/">Box2DSharp的介绍与使用</a> 中也提到过，改一下编译时生成格式就行了：</p><p><img src="/blogimages/2021/2021-07-08/9.png"></p><p>最后断点终于打上了！</p><p><img src="/blogimages/2021/2021-07-15/Snipaste_2021-07-15_18-07-26.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;一般在开发项目的时候，为了便于管理，都不会直接把代码建立到Unity3D中，而是使用第三方工程，然后编译成DLL放进来使用。&lt;/p&gt;
+&lt;p&gt;</summary>
+      
+    
+    
+    
+    <category term="Unity3D" scheme="https://cwhisme.ml/categories/Unity3D/"/>
+    
+    
+    <category term="其它" scheme="https://cwhisme.ml/tags/%E5%85%B6%E5%AE%83/"/>
+    
+  </entry>
   
   <entry>
     <title>Box2DSharp的介绍与使用</title>
@@ -41,9 +66,9 @@
     <link href="https://cwhisme.ml/2021/07/07/%E6%88%98%E6%96%97%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"/>
     <id>https://cwhisme.ml/2021/07/07/%E6%88%98%E6%96%97%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</id>
     <published>2021-07-07T04:13:08.000Z</published>
-    <updated>2021-07-09T03:44:16.123Z</updated>
+    <updated>2021-07-12T02:12:12.668Z</updated>
     
-    <content type="html"><![CDATA[<p>本文不涉及任何实际实现，仅为个人目前看法。因此可能也会有所不对的地方，若有问题还请指正。</p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这里特指网游，且非状态同步战斗类型。</p><p>主要指：房间类 或 挂机类，且有玩家数量限制。</p><p>之所以单独提出这两种类型，是因为这两种类型战斗(/服务器)是可以独立形成一个系统，而像状态同步类型游戏则不同，因为随时可以战斗或进行其它操作，战斗本身与正常游戏流程逻辑也会是有一定耦合的。以前那些MMO端游一般就是这种模型，这种类型个人没作过多研究，猜测如此。</p><p>而 房间类 或 放置类 则不同，一般来说，都会有一个独立的战斗服务器，无论是仅仅作数据分发，还是逻辑演算或本身就跑了一个完整战斗系统。</p><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="状态同步类型"><a href="#状态同步类型" class="headerlink" title="状态同步类型"></a>状态同步类型</h3><p>状态同步即服务器运行一个完整的『游戏世界』，一般见于大世界即时战斗的端游。不过也可以用于上述两种类型。</p><p>玩家操作会先发给服务器，服务器执行完毕，再将执行结果同步给客户端。即所有实际逻辑，客户端都不执行，而仅更新表现。例如玩家的位置：在状态同步中，玩家的位置信息，会以指定频率与服务器保持一致。客户端本身一般没有操作权限(不排除那种直接客户端移动，然后将位置同步给服务端的)。</p><h3 id="纯战报型"><a href="#纯战报型" class="headerlink" title="纯战报型"></a>纯战报型</h3><p>直接后台根据交战双方生成『战报』，然后将战报发回前台，前台仅作『回放』</p><p>该功能连战斗逻辑都是由后台实现，无论是PVE还是PVP，流程都一样。一般用于回合制，且所有战斗都不允许玩家操作的游戏。</p><p>例如：<a href="https://www.9game.cn/dhx3/">新仙剑奇侠传手游</a></p><p>前台接收到的为『每一个回合』战斗对象的行为描述，例如我方A攻击敌方对象B，或者我方B释放了某个技能。</p><p>而且由于接收到的是纯战报格式数据，基本上杜绝作弊可能性，前台仅需根据每回合对象战报描述，作对应表现即可，也不会涉及什么复杂逻辑，因此难度为简单。</p><p>不过由于整个战斗都纯粹由系统『自动』进行，交互能力较弱，属纯挂机类战斗。</p><p>这种类型由于毫无操作玩家毫无操作余地，只有一些老手游使用，新出的基本没有了。</p><h3 id="回合制交互"><a href="#回合制交互" class="headerlink" title="回合制交互"></a>回合制交互</h3><p>指以『回合』作为战斗流程，每回合由玩家选择释放指令，每回合有接收指令超时时间，超时则执行默认指令。</p><p>例如 <a href="https://djwk.qq.com/main.html">电击文库：零境交错</a></p><p>主要有两种：在进入战斗后，服务器可以实时运行一个战斗系统进行管理，也可以仅作指令分发，最终统计玩家指令，并重新跑一次战斗作验算。</p><p>其中统计指令，最终验算的方式性能较优，不过也有一定作弊风险。而PVP就必须实时运行一个战斗系统进行管理，因此这样PVP与PVE的处理就有一些差异(也可以就采用一套实时系统，只是会增加服务器压力)。由于是回合制，玩家操作一次才会有一次指令，因此同步网络要求不高，可以直接在普通的通信接口处理指令分发。</p><p>同时由于PVP过程中，每一回合都需要同时等待双方玩家完成操作，体验不会太好，因此也有采用回合制游戏去掉了PVP操作支持，仅保留PVE的玩家操作，若属于玩家双方对决，则直接令双方『自动战斗』。(例如：<a href="https://sgzhx.lingxigames.com/">三国志幻想大陆</a>)</p><h3 id="帧同步弱交互"><a href="#帧同步弱交互" class="headerlink" title="帧同步弱交互"></a>帧同步弱交互</h3><p>特指在完整帧同步结构上进行一部分删减，去掉实时的战斗服务器，战斗服收到数据，直接返回战斗结果——严格来说，已经不算是帧同步了，而叫『指定命令同步』。</p><p>例如：<a href="https://www.18touch.com/game/13290.html">新三国汉室复兴</a></p><p>不过除此之外，其他要求几乎与帧同步一致，而且也没看到其他介绍类似方式的名字，因此个人还是这样在称呼。</p><p>同样可以在客户端统计完毕玩家所有操作指令后(即前端战斗表现完成)，统一上传服务器跑一次战斗作验证，战斗服的功能主要是返回一个战斗结果，例如双方剩余血量，胜方等等。</p><p>看起来与上述回合制交互有些类似，但是更复杂一些，特别是前后端执行时涉及到同步『一致性』问题时。</p><p>表现上主要指不支持PVP战斗的交互，PVE中玩家操作也比较简单的情况，一般就操作一下释放技能的时机等，目前挂机类游戏，例如策略类游戏大多可能使用该方法。</p><p>该方法战斗不以回合作区分，而以『帧』或『时间』作战斗流程。</p><p>例如，规定一帧等于多少秒，然后将两者联系起来。</p><p>战斗系统中，更新一次算作一帧，直到满足战斗结束条件而结束，得出胜利失败方结果。</p><p>此种类型交互处理流程为：前端记录玩家操作指令，战斗结束发回后台验证，后台得出胜利失败结果后下发前端，前端以后台结果为准进行展示。</p><p>这种了类型虽然叫弱交互，实际上也是可以实现除PVP大部分玩家操作的，因为每个操作都算作一个指令，只要指令正常记录，验算结果不出问题即可。</p><p>该类型需要一个战斗服务器作结果验算。</p><h3 id="帧同步强交互"><a href="#帧同步强交互" class="headerlink" title="帧同步强交互"></a>帧同步强交互</h3><p>该类型需要一个实时战斗服务器作操作指令分发或验算。</p><p>由于仅同步指令，而非所有状态，因此数据占用相对状态同步更低(玩家数量不多的情况)。</p><p>此种类型大体与上面弱交互类型类似，不过由于有实时战斗服支持，因此可以实现PVP。(其实个人感觉上面弱交互也可以一定程度实现PVP，就是由系统外做服务器的同学实现一个“指令分发”的效果，不过由于不是每帧实时同步，而是在玩家触发“点击操作”时分发指令，可能导致战斗流程不是很流畅，且存在“不同步”及大延迟的风险)</p><p>例如：<a href="http://youxiputao.com/articles/11842">王者荣耀</a></p><blockquote><p>(注：玩家数量过大的战斗只能使用状态同步)</p></blockquote><p>参考：</p><blockquote><p><a href="https://zhuanlan.zhihu.com/p/104932624">帧同步和状态同步该怎么选（上）</a><br><a href="https://zhuanlan.zhihu.com/p/105826545">帧同步和状态同步该怎么选（下）</a></p></blockquote><h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><p>这里特指『房间类』战斗模式：即战斗过程会进入一个新场景，而非直接在当前情况下执行战斗(若那样就是纯状态同步网游了，实现原理就不一样，跟后台就挂很大勾了)</p><p>首先，作为这种类型的战斗，无论是性能还是维护上的考虑，前后端的战斗系统本身应该一致。</p><p>因为后端也需要运行，因此战斗系统必须完全独立，可以通过指定数据接口进行交互，例如事件系统。</p><p>后端由于无表现层，可以选择在需要的事件上进行注册即可。前端表现层所有数据皆以系统内部为准，例如角色位置、方向等等，并且不允许对系统内部的『直接』的更改。所有的玩家操作，都必须是一个『指令』，方便上传服务器使用。</p><p>因此主要大概可以再分为以下模块：</p><ul><li><p>场景：视战斗场景复杂度情况而定，若仅为『平面』战斗，且要求不高，则自己实现一个性能更优的四叉树一类场景管理亦可。也可以找 Github 上开源的物理引擎(如Box2D)。</p><blockquote><p>寻路：例如A*、Navmesh</p></blockquote></li><li><p>事件系统：仅负责时间分发，本身并无特殊功能，因此可以算是最简单的一份</p></li><li><p>定(/计)时器：管理技能CD、延迟触发等相关行为，与事件系统类似</p></li><li><p>角色：主要又分为三类</p><blockquote><ul><li>技能</li><li>AI</li><li>Buff</li></ul></blockquote></li></ul><p>其中，战斗逻辑中，『技能』应该算是最重要的一个，AI其次。</p><p>作为技能主要有两类：</p><ul><li>一种是策划提供描述，程序编码实现</li><li>一种由程序提供『积木』，由策划组合逻辑</li></ul><p>第二种一般都得有配套的编辑器工具，例如像行为树编辑器那种——不过取决于本身需求设计。</p><p>常规还有『链表式』：执行一个技能时，会附加初始节点到角色身上，当前挂载节点为当前生效功能，节点结束或满足一定条件，则执行其后节点，直到终点。</p><p>开场——&gt;接战——&gt;战斗中——&gt;战斗结束</p><p><strong>待补充……</strong></p>]]></content>
+    <content type="html"><![CDATA[<p>本文不涉及任何实际实现，仅为个人目前看法。因此可能也会有所不对的地方，若有问题还请指正。</p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这里特指网游，且非状态同步战斗类型。</p><p>主要指：房间类 或 挂机类，且有玩家数量限制。</p><p>之所以单独提出这两种类型，是因为这两种类型战斗(/服务器)是可以独立形成一个系统，而像状态同步类型游戏则不同，因为随时可以战斗或进行其它操作，战斗本身与正常游戏流程逻辑也会是有一定耦合的。以前那些MMO端游一般就是这种模型，这种类型个人没作过多研究，猜测如此。</p><p>而 房间类 或 放置类 则不同，一般来说，都会有一个独立的战斗服务器，无论是仅仅作数据分发，还是逻辑演算或本身就跑了一个完整战斗系统。</p><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="状态同步类型"><a href="#状态同步类型" class="headerlink" title="状态同步类型"></a>状态同步类型</h3><p>状态同步即服务器运行一个完整的『游戏世界』，一般见于大世界即时战斗的端游。不过也可以用于上述两种类型。</p><p>玩家操作会先发给服务器，服务器执行完毕，再将执行结果同步给客户端。即所有实际逻辑，客户端都不执行，而仅更新表现。例如玩家的位置：在状态同步中，玩家的位置信息，会以指定频率与服务器保持一致。客户端本身一般没有操作权限(不排除那种直接客户端移动，然后将位置同步给服务端的)。</p><h3 id="纯战报型"><a href="#纯战报型" class="headerlink" title="纯战报型"></a>纯战报型</h3><p>直接后台根据交战双方生成『战报』，然后将战报发回前台，前台仅作『回放』</p><p>该功能连战斗逻辑都是由后台实现，无论是PVE还是PVP，流程都一样。一般用于回合制，且所有战斗都不允许玩家操作的游戏。</p><p>例如：<a href="https://www.9game.cn/dhx3/">新仙剑奇侠传手游</a></p><p>前台接收到的为『每一个回合』战斗对象的行为描述，例如我方A攻击敌方对象B，或者我方B释放了某个技能。</p><p>而且由于接收到的是纯战报格式数据，基本上杜绝作弊可能性，前台仅需根据每回合对象战报描述，作对应表现即可，也不会涉及什么复杂逻辑，因此难度为简单。</p><p>不过由于整个战斗都纯粹由系统『自动』进行，交互能力较弱，属纯挂机类战斗。</p><p>这种类型由于毫无操作玩家毫无操作余地，只有一些老手游使用，新出的基本没有了。</p><h3 id="回合制交互"><a href="#回合制交互" class="headerlink" title="回合制交互"></a>回合制交互</h3><p>指以『回合』作为战斗流程，每回合由玩家选择释放指令，每回合有接收指令超时时间，超时则执行默认指令。</p><p>例如 <a href="https://djwk.qq.com/main.html">电击文库：零境交错</a></p><p>主要有两种：在进入战斗后，服务器可以实时运行一个战斗系统进行管理，也可以仅作指令分发，最终统计玩家指令，并重新跑一次战斗作验算。</p><p>其中统计指令，最终验算的方式性能较优，不过也有一定作弊风险。而PVP就必须实时运行一个战斗系统进行管理，因此这样PVP与PVE的处理就有一些差异(也可以就采用一套实时系统，只是会增加服务器压力)。由于是回合制，玩家操作一次才会有一次指令，因此同步网络要求不高，可以直接在普通的通信接口处理指令分发。</p><p>同时由于PVP过程中，每一回合都需要同时等待双方玩家完成操作，体验不会太好，因此也有采用回合制游戏去掉了PVP操作支持，仅保留PVE的玩家操作，若属于玩家双方对决，则直接令双方『自动战斗』。(例如：<a href="https://sgzhx.lingxigames.com/">三国志幻想大陆</a>)</p><h3 id="帧同步弱交互"><a href="#帧同步弱交互" class="headerlink" title="帧同步弱交互"></a>帧同步弱交互</h3><p>特指在完整帧同步结构上进行一部分删减，去掉实时的战斗服务器，战斗服收到数据，直接返回战斗结果——严格来说，已经不算是帧同步了，而叫『指定命令同步』。</p><p>例如：<a href="https://www.18touch.com/game/13290.html">新三国汉室复兴</a></p><p>不过除此之外，其他要求几乎与帧同步一致，而且也没看到其他介绍类似方式的名字，因此个人还是这样在称呼。</p><p>同样可以在客户端统计完毕玩家所有操作指令后(即前端战斗表现完成)，统一上传服务器跑一次战斗作验证，战斗服的功能主要是返回一个战斗结果，例如双方剩余血量，胜方等等。</p><p>看起来与上述回合制交互有些类似，但是更复杂一些，特别是前后端执行时涉及到同步『一致性』问题时。</p><p>表现上主要指不支持PVP战斗的交互，PVE中玩家操作也比较简单的情况，一般就操作一下释放技能的时机等，目前挂机类游戏，例如策略类游戏大多可能使用该方法。</p><p>该方法战斗不以回合作区分，而以『帧』或『时间』作战斗流程。</p><p>例如，规定一帧等于多少秒，然后将两者联系起来。</p><p>战斗系统中，更新一次算作一帧，直到满足战斗结束条件而结束，得出胜利失败方结果。</p><p>此种类型交互处理流程为：前端记录玩家操作指令，战斗结束发回后台验证，后台得出胜利失败结果后下发前端，前端以后台结果为准进行展示。</p><p>这种了类型虽然叫弱交互，实际上也是可以实现除PVP大部分玩家操作的，因为每个操作都算作一个指令，只要指令正常记录，验算结果不出问题即可。</p><p>该类型需要一个战斗服务器作结果验算。</p><h3 id="帧同步强交互"><a href="#帧同步强交互" class="headerlink" title="帧同步强交互"></a>帧同步强交互</h3><p>该类型需要一个实时战斗服务器作操作指令分发或验算。</p><p>由于仅同步指令，而非所有状态，因此数据占用相对状态同步更低(玩家数量不多的情况)。</p><p>此种类型大体与上面弱交互类型类似，不过由于有实时战斗服支持，因此可以实现PVP。(其实个人感觉上面弱交互也可以一定程度实现PVP，就是由系统外做服务器的同学实现一个“指令分发”的效果，不过由于不是每帧实时同步，而是在玩家触发“点击操作”时分发指令，可能导致战斗流程不是很流畅，且存在“不同步”及大延迟的风险)</p><p>例如：<a href="http://youxiputao.com/articles/11842">王者荣耀</a></p><blockquote><p>(注：玩家数量过大的战斗只能使用状态同步)</p></blockquote><p>参考：</p><blockquote><p><a href="https://zhuanlan.zhihu.com/p/104932624">帧同步和状态同步该怎么选（上）</a><br><a href="https://zhuanlan.zhihu.com/p/105826545">帧同步和状态同步该怎么选（下）</a></p></blockquote><h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><p>这里特指『房间类』战斗模式：即战斗过程会进入一个新场景，而非直接在当前情况下执行战斗(若那样就是纯状态同步网游了，实现原理就不一样，跟后台就挂很大勾了)</p><p>首先，作为这种类型的战斗，无论是性能还是维护上的考虑，前后端的战斗系统本身应该一致。</p><p>因为后端也需要运行，因此战斗系统必须完全独立，可以通过指定数据接口进行交互，例如事件系统。</p><p>后端由于无表现层，可以选择在需要的事件上进行注册即可。前端表现层所有数据皆以系统内部为准，例如角色位置、方向等等，并且不允许对系统内部的『直接』的更改。所有的玩家操作，都必须是一个『指令』，方便上传服务器使用。</p><p>因此主要大概可以再分为以下模块：</p><ul><li><p>场景：视战斗场景复杂度情况而定，若仅为『平面』战斗，且要求不高，则自己实现一个性能更优的四叉树一类场景管理亦可。也可以找 Github 上开源的物理引擎(如Box2D)。</p><blockquote><p>寻路：例如A*、Navmesh</p></blockquote></li><li><p>事件系统：仅负责时间分发，本身并无特殊功能，因此可以算是最简单的一份</p></li><li><p>定(/计)时器：管理技能CD、延迟触发等相关行为，与事件系统类似</p></li><li><p>角色：主要又分为三类</p><blockquote><ul><li>技能</li><li>AI</li><li>Buff</li></ul></blockquote></li></ul><p>其中，战斗逻辑中，『技能』应该算是最重要的一个，AI其次。</p><p>作为技能主要有两类：</p><ul><li>一种是策划提供描述，程序编码实现</li><li>一种由程序提供『积木』，由策划组合逻辑</li></ul><p>第二种一般都得有配套的编辑器工具，例如像行为树编辑器那种——不过取决于本身需求设计。</p><p>常规还有『链式』结构：执行一个技能时，会附加初始节点到角色身上，当前挂载节点为当前生效功能，节点结束或满足一定条件，则执行其后节点，直到终点。</p><p>开场——&gt;接战——&gt;战斗中——&gt;战斗结束</p><p><strong>待补充……</strong></p>]]></content>
     
     
       
@@ -483,30 +508,6 @@
     <category term="UE4" scheme="https://cwhisme.ml/tags/UE4/"/>
     
     <category term="C++" scheme="https://cwhisme.ml/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>UE4.15 不允许使用不完整的类型错误</title>
-    <link href="https://cwhisme.ml/2017/03/20/2017-3-20-UE4-Incomplete-types-are-not-allowed/"/>
-    <id>https://cwhisme.ml/2017/03/20/2017-3-20-UE4-Incomplete-types-are-not-allowed/</id>
-    <published>2017-03-20T12:59:41.000Z</published>
-    <updated>2021-05-10T02:57:25.971Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上周最终还是找了份工作——不过已经不是做游戏什么的了——而是VR、AR…据说后面还有MR之类的。<br>虽然换了一份工作，待遇毫无长进——毕竟现在行情似乎不大好，也没办法了。毕竟，稳定和可持续发展才是王道吧。<br>(好吧，我承认是为了继续待在重庆，然后重庆找不着合适的游戏公司了，加上考虑自己对UE4感兴趣，然后大家都在说VR后面或许发展比手游更好之类的，所以就毅然转行了)</p><p>上周入职之后，算是把Oculus DK2、HTC Vive、Gear VR摸了个遍——当然是用Unity，基本上接口不难，大半天就熟悉了。<br>而据说新公司主要是使用UE4，所以，最主要的还是：学习UE4。</p><p>作为一个程序，我其实是不是很喜欢蓝图，因此主要还是研究C++的实现。<br>但是作为Unity转过来的程序，编程语言突然被从C#变成了C++——用起来感觉处处都透着一股奇怪。加上UE4对于C++相关接口每次发版本都要变，碰上问题都很可能就是“最新”的了。</p><p>比如这次。</p><h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><p>这次其实也是一个简单的问题，但着实花了些时间来琢磨。其原因大概是官方的4.15的解释：“更快的C++编译时间：‘虚幻引擎 4 代码库现在的编译速度提升了 50%！头文件只包含其所需的其他标头，而不是每个包含大型单体标头（例如 Engine.h 和 UnrealEd.h）的源文件 - 我们将这一做法称为含您所用（IWYU）。’”<br>然后直接结果就是，本来在早一点版本的UE4写的好好代码，升级到最新UE4.15之后，当我们在使用某些接口的时候，直接被编译器提示：“不允许使用不完整的类型”(当然也有其它类型的文字提示，但意思应该差不多)</p><p>最普遍的，比如说我想要画一条线:</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ULineBatchComponent*  lineBatch = <span class="built_in">GetWorld</span>()-&gt;PersistentLineBatcher;</span><br><span class="line"><span class="keyword">if</span> (lineBatch != <span class="literal">nullptr</span>)</span><br><span class="line">&#123;</span><br><span class="line">lineBatch-&gt;<span class="built_in">DrawLine</span>(<span class="built_in">GetActorLocation</span>(), <span class="built_in">GetActorForwardVector</span>() * <span class="number">10</span>, FLinearColor::Red, <span class="number">-1</span>, LineSize, <span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>就会得到这样的提示，并且编译无法通过：</p><p><img src="/blogimages/oldpictures/2017.3.20-1.png" alt="错误"></p><p>而在UE4.15版本中，要解决这个错误，就必须手动添加头文件的引用了。<br>比如画线这个组件的头文件是LineBatchComponent.h，我们就必须在代码前边手动包含它：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Components/LineBatchComponent.h&quot;</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure><p>不然就是报错“不允许指针指向不完整的类型”。<br>最蛋痛的是，C++包含的时候必须有这个头文件的路径。也就是说，你得找到他的路径，或者见着某个代码是如何包含的才行…虽然可以按下F12可以定位，但是好慢啊…</p><p>再来举个栗子：添加输入按键映射。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPlayerInput::<span class="built_in">AddEngineDefinedActionMapping</span>(<span class="built_in">FInputActionKeyMapping</span>(<span class="string">&quot;Jump&quot;</span>, EKeys::SpaceBar));</span><br></pre></td></tr></table></figure><p>直接这样子写也是不行的，错误是“不允许使用不完整的类型”，所以必须包含完整路径的头文件：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;GameFramework/PlayerInput.h&quot;</span></span></span><br></pre></td></tr></table></figure><h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>所以，使用UE4.15或者更新版本的话，大概都会有这问题(如果官方本来就是这样打算的话，自己想要什么就必须自己添加头文件…),就要稍微多动动手了，明白问题所在，当然解决也快。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;上周最终还是找了份工作——不过已经不是做游戏什么的了——而是VR、AR…据说后面还有MR之类的。&lt;br&gt;虽然换了一份工作，待遇毫无长进——毕</summary>
-      
-    
-    
-    
-    <category term="UE4" scheme="https://cwhisme.ml/categories/UE4/"/>
-    
-    
-    <category term="UE4" scheme="https://cwhisme.ml/tags/UE4/"/>
     
   </entry>
   
