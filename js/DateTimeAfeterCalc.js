@@ -1,0 +1,1 @@
+var nowStr="今天";var dayStr="天前";$(document).ready(function(){$("span#dateTimeAfter").each(function(){var t=$(this).text().trim();var a=t.split("-");var r=new Date(a[0],a[1]-1,a[2]);var e=new Date;var n=parseInt((e-r)/86400/1e3);var v=n==0?nowStr:n+dayStr;$(this).text(v)})});
