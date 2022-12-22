@@ -1,1 +1,39 @@
-$(document).ready(function(){var l=0;var h=false;var f;$(document).click(function(){l++;if(l<64||h)return;clearInterval(f);h=!h;if(!h){hackEffectCanvas.getContext("2d").clearRect(0,0,window.screen.width,window.screen.height);return}const t=window.screen;const a=hackEffectCanvas.width=t.width;const e=hackEffectCanvas.height=t.height;const n=hackEffectCanvas.getContext("2d");const c=Array(Math.floor(a/10)+1).fill(0);const r=t=>t[Math.floor(Math.random()*t.length)];const o="0123456789ABCDEF".split("");f=setInterval(()=>{n.fillStyle="rgba(255,255,255,0.05)";n.fillRect(0,0,a,e);n.fillStyle="rgba("+Math.random()*255+","+Math.random()*255+","+Math.random()*255+",.5)";c.map((t,a)=>{n.fillText(r(o),a*10,t);c[a]=t>=e||t>50+1e4*Math.random()?0:t+10})},1e3/30)})});
+// $(document).ready(function () {
+//     var open = 0;
+//     var display = false;
+//     var saveInterval;
+//     $(document).click(function () {
+//         open++;
+//         if (open < 64 || display) return;
+//         //hacker effect
+//         clearInterval(saveInterval);
+//         display = !display;
+//         //console.log(display);
+//         if (!display) {
+//             hackEffectCanvas.getContext("2d").clearRect(0, 0, window.screen.width, window.screen.height);
+//             return;
+//         }
+//         const s = window.screen;
+//         const w = (hackEffectCanvas.width = s.width);
+//         const h = (hackEffectCanvas.height = s.height);
+//         const ctx = hackEffectCanvas.getContext("2d");
+
+//         const p = Array(Math.floor(w / 10) + 1).fill(0);
+
+//         const random = (items) => items[Math.floor(Math.random() * items.length)];
+
+//         const hex = "0123456789ABCDEF".split("");
+
+//         saveInterval = setInterval(() => {
+//             //ctx.fillStyle = "rgba(0,0,0,.05)";
+//             ctx.fillStyle = "rgba(255,255,255,0.05)";
+//             ctx.fillRect(0, 0, w, h);
+//             //ctx.fillStyle = "#0f0";
+//             ctx.fillStyle = "rgba(" + Math.random() * 255 + "," + Math.random() * 255 + "," + Math.random() * 255 + ",.5)";
+//             p.map((v, i) => {
+//                 ctx.fillText(random(hex), i * 10, v);
+//                 p[i] = v >= h || v > 50 + 10000 * Math.random() ? 0 : v + 10;
+//             });
+//         }, 1000 / 30);
+//     });
+// });
