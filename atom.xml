@@ -6,7 +6,7 @@
   <link href="https://wangjiaying.top/atom.xml" rel="self"/>
   
   <link href="https://wangjiaying.top/"/>
-  <updated>2024-10-20T12:02:11.054Z</updated>
+  <updated>2025-02-16T12:32:06.812Z</updated>
   <id>https://wangjiaying.top/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>UiharuMind 工具使用指南</title>
+    <link href="https://wangjiaying.top/2025/02/16/UiharuMind%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"/>
+    <id>https://wangjiaying.top/2025/02/16/UiharuMind%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</id>
+    <published>2025-02-16T03:44:58.000Z</published>
+    <updated>2025-02-16T12:32:06.812Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a class="anchor" href="#前言">#</a> 前言</h1><p>这是去年 5 月份左右开始搞的一个 AI 工具应用，当时一度沉迷研究 AI，特别是本地化部署的 AI 模型之类的。就想着做一个适配个人使用的工具，当时也没什么系统级的应用，而且有句话叫适合自己的才是最好的，于是就有了 UiharuMind。</p><p>就目前来介绍，大概可以这样说：</p><blockquote><p>UiharuMind 是一个开源的本地化部署 AI 模型的工具，可以让你在本地部署自己的 AI 模型，并通过 UiharuMind 的界面进行交互。<br />同时也支持远程模型调用。可以在 Mac、Windows 平台上运行（Linux 应该也行，但是有一些平台化适配需要做，因为实在用不上就没弄了）。</p></blockquote><h1 id="功能介绍"><a class="anchor" href="#功能介绍">#</a> 功能介绍</h1><p>UiharuMind 目前支持的功能有：</p><ol><li>本地化部署 AI 模型：UiharuMind 可以将本地的 AI 模型部署到本地，后端通过调用 llama.cpp 实现本地模型运行：因此支持格式也与其保持一致：GGUF，这些都可以直接在<span class="exturl" data-url="aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9tb2RlbHM/bGlicmFyeT1nZ3VmJmFtcDtzb3J0PXRyZW5kaW5n">抱抱脸</span>下载。</li><li>远程模型调用：UiharuMind 也支持远程模型调用，你可以通过 UiharuMind 的界面调用远程的 AI 模型，并获取模型的输出。</li><li>常规聊天：支持工具人、角色扮演两种类型的聊天模式，可以和 AI 模型进行交流。</li><li>快捷功能：通过一些快捷键调出快速操作，例如复制文字、图片后快速操作。</li><li>截图：多模态 AI OCR、截图聊天</li></ol><blockquote><p>注：<br />因为本地部署的 AI 模型后端是使用 llama-server 开启了一个兼容 OpenAI 格式的本地服务器，因此其实也可以作为其它应用需要的远程 AI 的后端 (本地部署)。<br />默认端口为 1396，连接时直接填入 IP:1396 即可。<br />例如：<span class="exturl" data-url="aHR0cDovLzEyNy4wLjAuMToxMzk2">http://127.0.0.1:1396</span></p></blockquote><h2 id="剪切板文字"><a class="anchor" href="#剪切板文字">#</a> 剪切板文字</h2><p>当复制某些文字时，会在鼠标位置处出现一本书的图标，鼠标移动上去会弹出更多可选操作：</p><ul><li>解释：要求 AI 解释复制的文字的意思。</li><li>翻译：将复制的文字翻译为本地语言。</li><li>思考：要求 AI 思考复制的文字的意义。</li><li>询问：针对复制的文字进行额外的输入询问。</li></ul><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-40-54.webp" alt="img.webp" /></p><p>回复时会自动打开一个简单的结果窗口：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-41-32.webp" alt="img.webp" /></p><p>如果还想针对问题进行进一步的询问，可以点击右下角 “转为临时对话” 按钮：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-43-55.webp" alt="img.webp" /></p><p>选择转为临时对话后，继续对话的内容会自动保存到聊天列表中，但是请注意：</p><blockquote><p>临时对话的聊天记录只有最后一个，开启同一个功能的临时对话会覆盖之前的聊天记录。</p></blockquote><h2 id="快捷键"><a class="anchor" href="#快捷键">#</a> 快捷键</h2><ul><li>截图 (Alt+Shift+Z)</li><li>快捷询问 (Alt+Shift+A)</li><li>剪切板历史 (Alt+Shift+S)</li><li>翻译 (Alt+Shift+Q)</li></ul><blockquote><p>注：使用快捷功能时，若当前没有主动加载模型，那么会自动检测合适的远程模型调用。</p></blockquote><p>主要功能可能只有截图和翻译，需要额外说一下：</p><h3 id="翻译功能"><a class="anchor" href="#翻译功能">#</a> 翻译功能</h3><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-24-55.webp" alt="img.webp" /></p><p>通过快捷键可以直接打开翻译界面。</p><h3 id="截图功能"><a class="anchor" href="#截图功能">#</a> 截图功能</h3><p>当截图成功后，会自动固定在显示器上：</p><blockquote><p>目前的操作逻辑为：双击关闭。</p></blockquote><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-20-46.webp" alt="img.webp" /></p><p>上述截图中，红框中的为 OCR 功能，可以将图片中的文字识别出来，以它为中心的按钮功能分别是：</p><ul><li>左侧按钮分别为：图片编辑、图片编辑后会出现的切换回原始图片的按钮。</li><li>带图片对话 (可以针对图片询问问题)、复制截图到剪切板、保存截图</li></ul><p>图片对话：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-51-41.webp" alt="img.webp" /></p><p>继续追问：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-53-57.webp" alt="img.webp" /></p><blockquote><p>当模型支持多模态时，对话输入框顶部会额外显示 “上传图片” 按钮，可以直接上传图片进行对话。</p></blockquote><h1 id="本地模型部署"><a class="anchor" href="#本地模型部署">#</a> 本地模型部署</h1><h2 id="准备工作"><a class="anchor" href="#准备工作">#</a> 准备工作</h2><h3 id="1-首先需要准备好你的-ai-模型并将其转换为-gguf-格式太麻烦一般人应该都不会搞-或直接下载已转换好的模型如抱抱脸"><a class="anchor" href="#1-首先需要准备好你的-ai-模型并将其转换为-gguf-格式太麻烦一般人应该都不会搞-或直接下载已转换好的模型如抱抱脸">#</a> 1. <s>首先需要准备好你的 AI 模型，并将其转换为 GGUF 格式 (太麻烦一般人应该都不会搞)。</s>，或直接下载已转换好的模型，如：<span class="exturl" data-url="aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9tb2RlbHM/bGlicmFyeT1nZ3VmJmFtcDtzb3J0PXRyZW5kaW5n">抱抱脸</span>。</h3><h3 id="2-确认本地执行后端"><a class="anchor" href="#2-确认本地执行后端">#</a> 2. 确认本地执行后端</h3><p>在设置界面 -&gt; 后端 -&gt; 选择本地后端，并确认路径正确。</p><p><img data-src="/blogimages/2025/2025-02-16/Setting.webp" alt="img.webp" /></p><p>如果不存在，可以选择点击更新，会检测目前最新的运行后端：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_12-36-10.webp" alt="img.webp" /></p><p>之后选择合适的后端版本，并点击下载即可。程序会自动下载并解压到指定目录：</p><blockquote><p>注意：AMD 显卡专用的 ROCM 版本是带 hip 的，具体需要更具自己 GPU 型号下载，或者直接下载 Vulkan 或 OpenCL 版本。</p></blockquote><ul><li>gfx1030(RX6800-RX6950XT)</li><li>gfx1100（RX7900XTX 和 RX7900XT）</li><li>gfx1101（RX7700XT 和 RX7800XT）</li></ul><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_15-16-01.webp" alt="img.webp" /></p><p>这里简单以 Vulkan 版本为例：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_15-18-39.webp" alt="img.webp" /></p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_15-19-31.webp" alt="img.webp" /></p><p>之后，进入模型界面，在模型界面左上角有本地模型目录设置，以及快捷打开模型目录的按钮：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_15-22-06.webp" alt="img.webp" /></p><p>如果想保持默认，可以直接将下载的模型放在默认目录下，否则可以点击更换按钮选择自己的模型目录。</p><blockquote><p>好像现在忘了做文件即时监控刷新了，因此只有在更换模型目录后才会刷新，如果列表没有更新，可以试试更换一下目录，或者直接重启软件试一下。</p></blockquote><p>如果操作正确，应该可以看到模型列表：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_16-11-50.webp" alt="img.webp" /></p><h3 id="3-加载模型"><a class="anchor" href="#3-加载模型">#</a> 3. 加载模型</h3><p>在对话页签中，界面顶部有选择加载模型的列表，点击模型名称即可加载模型：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_16-18-48.webp" alt="img.webp" /></p><p>另外，对话右侧的 “本地模型设置” 中，可以设置模型的一些参数，例如：</p><ul><li>GPU Layer：运行时需要卸载至 GPU 的层数，GPU 运行的层数越多，运行越快。但是请注意不要爆显存了，那同样会导致运行变得很慢。</li><li>Context Size：加载模型时的最大上下文大小，默认为 0 时将从模型读取最大支持大小。请注意：上下文越大，要求的 RAM 越多。</li></ul><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_18-28-26.webp" alt="img.webp" /></p><blockquote><p>如果有需要可以进行调整，例如 GPU Layer，不调整就是纯粹运行在 CPU 上了，起不到加速效果。</p></blockquote><h3 id="4-对话"><a class="anchor" href="#4-对话">#</a> 4. 对话</h3><p>在对话页签中，可以进行对话，输入文字即可：</p><p>目前也简单适配了下 think 标签，后面有时间也会整个设置 (支持直接排除 think 内容之类的)：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_18-20-50.webp" alt="img.webp" /></p><h3 id="5-llamacpp-全局设置"><a class="anchor" href="#5-llamacpp-全局设置">#</a> 5. llama.cpp 全局设置</h3><p>在主设置页面，还可以对 llama.cpp 一些其它参数，有需要也可以进行一定调整：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_16-27-09.webp" alt="img.webp" /></p><h1 id="远程模型调用"><a class="anchor" href="#远程模型调用">#</a> 远程模型调用</h1><p>UiharuMind 还支持远程模型调用，可以通过模型设置界面添加远程 AI 模型：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-06-03.webp" alt="img.webp" /></p><p>预配置的定义有智谱、混元模型，这两家都有免费 API 可以调用：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-06-38.webp" alt="img.webp" /></p><p>如果不在这个列表，也可以选择自定义配置，手动输入模型地址：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-09-04.webp" alt="img.webp" /></p><p>远程配置添加完毕后，列表同样会出现对应模型，同时名字上会标记为 “远程模型”：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-10-59.webp" alt="img.webp" /></p><p>之后与本地模型一样使用，正常选择即可：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-12-02.webp" alt="img.webp" /></p><h1 id="提示词等功能"><a class="anchor" href="#提示词等功能">#</a> 提示词等功能</h1><p>UiharuMind 还支持一些提示词功能，简单的提示这儿称为工具人，复合的提示称为角色扮演，角色扮演的角色可以挂载工具人 (复用提示)<br />，创建角色时可以选择性的设置：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-28-32.webp" alt="img.webp" /></p><p>另外，适用于角色扮演的角色，支持导入 SillyTavern 角色卡：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_20-02-43.webp" alt="img.webp" /></p><blockquote><p>当然这个肯定没 SillyTavern 本身完善，只能说有这么个功能。</p></blockquote><p>主页中会显示当前的已存在角色：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_19-26-40.webp" alt="img.webp" /></p><p>其中快捷工具使用的系统角色，勾选 “显示隐藏” 后也会显示在菜单中，描述中都有说明具体对应什么样的系统工具，可以视个人情况对其进行调整。</p><h1 id="最后"><a class="anchor" href="#最后">#</a> 最后</h1><p>还有个小提示，默认关闭主界面只是隐藏界面，如果想完全退出程序需要在系统托盘中右键退出：</p><p><img data-src="/blogimages/2025/2025-02-16/Uiharu_2025-02-16_20-10-48.webp" alt="img.webp" /></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#前言&quot;&gt;#&lt;/a&gt; 前言&lt;/h1&gt;
+&lt;p&gt;这是去年 5 月份左右开始搞的一个 AI 工具应用，当时一度沉迷研究 AI，特别是本地化部署的 AI 模型之类的。就想着做一个适配个人使用的工具，当时也没什么系统级</summary>
+      
+    
+    
+    
+    <category term="工具" scheme="https://wangjiaying.top/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="工具" scheme="https://wangjiaying.top/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+    <category term="Avalonia" scheme="https://wangjiaying.top/tags/Avalonia/"/>
+    
+  </entry>
   
   <entry>
     <title>UiharuMind 国庆开发笔记</title>
@@ -520,31 +547,6 @@
     
     
     <category term="笔记" scheme="https://wangjiaying.top/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>蛋糕</title>
-    <link href="https://wangjiaying.top/2023/06/11/%E8%9B%8B%E7%B3%95/"/>
-    <id>https://wangjiaying.top/2023/06/11/%E8%9B%8B%E7%B3%95/</id>
-    <published>2023-06-11T13:57:28.000Z</published>
-    <updated>2023-10-02T09:13:03.019Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a class="anchor" href="#前言">#</a> 前言</h1><p>前几天不是说趁着 618 买了做蛋糕的工具吗：<a href="/2023/06/04/%E7%83%A4%E7%AE%B1%E5%8E%A8%E5%B8%88%E6%9C%BA%E4%B8%8E%E7%94%B5%E9%A5%AD%E9%94%85/" title="烤箱、厨师机与电饭锅">烤箱、厨师机与电饭锅</a>，这几天陆续到货之后，前后也试了三次了。</p><p>于是简单记录一下。</p><h1 id="第一次"><a class="anchor" href="#第一次">#</a> 第一次</h1><p>这是拷完的样子：</p><p><img data-src="/blogimages/2023/2023-06-11/MVIMG_20230606_211842.webp" alt="" /></p><p>硬得像石头似的...</p><p><img data-src="/blogimages/2023/2023-06-11/MVIMG_20230606_213041.webp" alt="" /></p><p>用筷子戳出来，简直就是... 比蛋糕饼都不如，而且一股腥味 🤮<br />(为了不浪费，还是含泪挖了些吃了)</p><h1 id="第二次"><a class="anchor" href="#第二次">#</a> 第二次</h1><p>第一次失败之后，就再仔细查看了对应教程，以及效果、特别打发时间：想到第一次机器拿到手时，由于担心问题，只打发了 2~3 分钟吧？那肯定是不行的。<br />另外还有糖、面粉都是『盲放』，糖其实可以事先就跟蛋放一块一起打发。</p><p>于是第二次吸取教训，用勺子量了 24g 糖 (面粉还是盲放的)，一开始就放进去，并一直让机器打发了 12 分钟左右。</p><p>最后从搅拌桶拿出来时，手动搅拌面粉时太紧急，依然出了差错：</p><p><img data-src="/blogimages/2023/2023-06-11/MVIMG_20230609_202242.webp" alt="" /><br /><img data-src="/blogimages/2023/2023-06-11/IMG_20230609_204926.webp" alt="" /><br /><img data-src="/blogimages/2023/2023-06-11/MVIMG_20230609_205423.webp" alt="" /></p><p>第二次弄出来的，能吃，但是依然一股腥味，只是味道没有第一次那么浓烈了。</p><h1 id="第三次"><a class="anchor" href="#第三次">#</a> 第三次</h1><p>第二次之后，特意又查了下蛋糕『去腥』的方式，去超市买了白醋、白酒准备着。</p><p>总结了之前的失败经验：第一次打发时间，第二是混合面粉操作，第三跟糖有一点点关系</p><p>经过查询，感觉混合面粉这一步操作，可以直接在搅拌桶低低速混合的吧？毕竟第二次发出来那么多气泡。</p><p>于是这一次操作步骤是：</p><ol><li>先低速打发</li><li>然后高速</li><li>最后低速将大气泡混小</li><li>再最后中低速混合面粉</li></ol><p>如此效果感觉就好多了：</p><p><img data-src="/blogimages/2023/2023-06-11/IMG_20230611_162938.webp" alt="" /></p><p>烤了几分钟：</p><p><img data-src="/blogimages/2023/2023-06-11/IMG_20230611_163653.webp" alt="" /></p><p>160 度烤完：</p><p><img data-src="/blogimages/2023/2023-06-11/IMG_20230611_170253.webp" alt="" /></p><p>切开：</p><p><img data-src="/blogimages/2023/2023-06-11/IMG_20230611_170524.webp" alt="" /></p><p><img data-src="/blogimages/2023/2023-06-11/IMG_20230611_174001.webp" alt="" /></p><p>总之，虽然第三次弄出来的还是塌陷了，不过总算可以吃了，而且味道感觉还不错 🤤，当时就吃了两块 (醋和白酒还是有用)。</p><h1 id="总结"><a class="anchor" href="#总结">#</a> 总结</h1><p>目前配方：</p><ul><li>三个鸡蛋</li><li>若干面粉 (盲放)</li><li>24~30g 糖</li><li>几滴醋和白酒</li></ul><p>步骤：</p><ol><li>鸡蛋、糖、醋、白酒 同时放进去</li><li>低速 -&gt; 高速 -&gt; 中低速 -&gt; 中低速加面粉</li><li>入模</li><li>160 度烤半个小时 (这个不好说，感觉随便差不多就行了)</li></ol><p>后面除了上述步骤外，还准备加温后打发。</p><p>至于分蛋法... 全蛋能做何必分蛋呢，我像是会单独去用分蛋法的样子吗？<br />—— 麻烦，想拒绝。(而且分蛋器不知道为啥卡路上了，一周还没到。不过，就算到了可能也不会想用了，全蛋要是可以就不想麻烦地去分蛋了)</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#前言&quot;&gt;#&lt;/a&gt; 前言&lt;/h1&gt;
-&lt;p&gt;前几天不是说趁着 618 买了做蛋糕的工具吗：&lt;a href=&quot;/2023/06/04/%E7%83%A4%E7%AE%B1%E5%8E%A8%E5%B8%88%E</summary>
-      
-    
-    
-    
-    <category term="生活" scheme="https://wangjiaying.top/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="生活" scheme="https://wangjiaying.top/tags/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
